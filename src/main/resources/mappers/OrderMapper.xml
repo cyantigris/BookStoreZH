@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyan.bookstore.dao.OrderDAO">
+    <insert id="create"  parameterType="com.haoyan.bookstore.pojo.entity.Order">
+        INSERT INTO order (order_id, item_list, userid, order_status, address, created_at, updated_at)
+        VALUES(#{orderId},#{itemList}, #{userId}, #{orderStatus}, #{address}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM order WHERE order_id = #{orderId}
+    </delete>
+
+    <update id="updateAddress">
+        Update order
+        SET
+            address = #{address},
+            updated_at = NOW()
+        WHERE order_id = #{orderId}
+    </update>
+
+    <update id="updateOrderStatus">
+        Update order
+        SET
+            order_status = #{orderStatus},
+            updated_at = NOW()
+        WHERE order_id = #{orderId}
+    </update>
+</mapper>

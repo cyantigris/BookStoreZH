@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyan.bookstore.dao.UserDAO">
+    <insert id="addUser"  parameterType="com.haoyan.bookstore.pojo.entity.User">
+        INSERT INTO user (userid, username, role, password, created_at, updated_at)
+        VALUES(#{userId},#{userName}, #{role}, #{password}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <delete id="removeUser">
+        DELETE FROM user WHERE book_id = #{userId}
+    </delete>
+
+    <update id="updateUser">
+        Update user
+        SET username = #{userName},
+            role = #{role},
+            password = #{password},
+            updated_at = NOW()
+        WHERE userid = #{userId}
+    </update>
+    <resultMap id="userMap" type="com.haoyan.bookstore.pojo.entity.User">
+        <result column="userid" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="role" property="role" typeHandler="com.haoyan.bookstore.utils.RoleTypeHandler"/>
+        <result column="password" property="password"/>
+        <result column="created_at" property="createdAt" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="updated_at" property="updatedAt" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    </resultMap>
+    <select id="queryById" resultMap="userMap">
+        SELECT userid, username, role, password, created_at, updated_at
+        FROM user
+        WHERE userid = #{userId}
+    </select>
+
+    <select id="queryByName" resultMap="userMap">
+        SELECT userid, username, role, password, created_at, updated_at
+        FROM user
+        WHERE username = #{userName}
+    </select>
+
+    <select id="queryAll" resultMap="userMap">
+        SELECT userid, username, role, password, created_at, updated_at
+        FROM user
+        ORDER BY userid
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>

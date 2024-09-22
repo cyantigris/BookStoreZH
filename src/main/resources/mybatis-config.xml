@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   <properties>
+       <property name="jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+       <property name="jdbc.url" value="jdbc:mysql://localhost:3306/new_schema?serverTimezone=UTC"/>
+       <property name="jdbc.user" value="root"/>
+       <property name="jdbc.pass" value="1234567890"/>
+   </properties>
+    <!-- set mybatis config -->
+    <settings>
+        <!-- Use jdbc's getGeneratedKeys to get key -->
+        <setting name="useGeneratedKeys" value="true" />
+
+        <!-- User col alias name as col name. Default:true -->
+        <setting name="useColumnLabel" value="true" />
+
+        <!-- Use camel naming transform:Table{create_time} -> Entity{createTime} -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+    <typeHandlers>
+        <typeHandler javaType='com.haoyan.bookstore.pojo.enums.RoleEnum' handler='com.haoyan.bookstore.utils.RoleTypeHandler' />
+    </typeHandlers>
+<!--    <typeAliases>-->
+<!--        <package name="com.haoyan"/>-->
+<!--    </typeAliases>-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.pass}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mappers/BookMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haoyan.bookstore.dao.BookDAO">
+    <insert id="addBook"  parameterType="com.haoyan.bookstore.pojo.entity.Book">
+        INSERT INTO book (book_id, name, detail, stock_num, pic, created_at, updated_at)
+        VALUES(#{bookId},#{name}, #{desc}, #{stockNum}, #{pic}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <delete id="removeBook">
+        DELETE FROM book WHERE book_id = #{bookId}
+    </delete>
+
+    <update id="updateBook">
+        Update book
+        SET name = #{name},
+            detail = #{desc},
+            stock_num = #{stockNum},
+            pic = #{pic},
+            updated_at = NOW()
+        WHERE book_id = #{bookId}
+    </update>
+    <resultMap id="bookMap" type="com.haoyan.bookstore.pojo.entity.Book">
+        <result column="bookid" property="bookId"/>
+        <result column="name" property="name"/>
+        <result column="detail" property="detail"/>
+        <result column="stocknum" property="stockNum"/>
+        <result column="pic" property="pic"/>
+        <result column="created_at" property="createdAt" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result column="updated_at" property="updatedAt" jdbcType="BIGINT" javaType="java.lang.Long"/>
+    </resultMap>
+    <select id="queryById" resultMap="bookMap">
+        SELECT bookid, name, detail, stocknum, pic, created_at, updated_at
+        FROM book
+        WHERE bookid = #{bookId}
+    </select>
+
+    <select id="queryAll" resultMap="bookMap">
+        SELECT bookid, name, detail, stocknum, pic, created_at, updated_at
+        FROM book
+        ORDER BY bookid
+        LIMIT #{offset}, #{limit}
+    </select>
+
+</mapper>
