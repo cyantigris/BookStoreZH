@@ -5,7 +5,7 @@ import com.haoyan.bookstore.pojo.enums.OrderStatusEnum;
 import java.util.HashMap;
 
 public class Order {
-    private int orderId;
+    private long orderId;
     private HashMap<Long, Integer> itemList;
     private int userId;
     private OrderStatusEnum orderStatus;
@@ -13,7 +13,7 @@ public class Order {
     private long createdAt;
     private long updatedAt;
 
-    public Order(int orderId, HashMap<Long, Integer> itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
+    public Order(long orderId, HashMap<Long, Integer> itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
         this.orderId = orderId;
         this.itemList = itemList;
         this.userId = userId;
@@ -23,7 +23,7 @@ public class Order {
         this.updatedAt = updatedAt;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 

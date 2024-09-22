@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 public class OrderCreateRequest {
     private int orderId;
-    private HashMap<String, Integer> itemList;
+    private HashMap<Long, Integer> itemList;
     private int userId;
     private OrderStatusEnum orderStatus;
 
     private String address;
 
-    public OrderCreateRequest(int orderId, HashMap<String, Integer> itemList, int userId, OrderStatusEnum orderStatus) {
+    public OrderCreateRequest(int orderId, HashMap<Long, Integer> itemList, int userId, OrderStatusEnum orderStatus) {
         this.orderId = orderId;
         this.itemList = itemList;
         this.userId = userId;
@@ -27,11 +27,11 @@ public class OrderCreateRequest {
         this.orderId = orderId;
     }
 
-    public HashMap<String, Integer> getItemList() {
+    public HashMap<Long, Integer> getItemList() {
         return itemList;
     }
 
-    public void setItemList(HashMap<String, Integer> itemList) {
+    public void setItemList(HashMap<Long, Integer> itemList) {
         this.itemList = itemList;
     }
 
