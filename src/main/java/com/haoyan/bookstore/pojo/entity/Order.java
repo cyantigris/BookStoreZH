@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 public class Order {
     private int orderId;
-    private HashMap<String, Integer> itemList;
+    private HashMap<Long, Integer> itemList;
     private int userId;
     private OrderStatusEnum orderStatus;
     private String address;
     private long createdAt;
     private long updatedAt;
 
-    public Order(int orderId, HashMap<String, Integer> itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
+    public Order(int orderId, HashMap<Long, Integer> itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
         this.orderId = orderId;
         this.itemList = itemList;
         this.userId = userId;
@@ -31,11 +31,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public HashMap<String, Integer> getItemList() {
+    public HashMap<Long, Integer> getItemList() {
         return itemList;
     }
 
-    public void setItemList(HashMap<String, Integer> itemList) {
+    public void setItemList(HashMap<Long, Integer> itemList) {
         this.itemList = itemList;
     }
 

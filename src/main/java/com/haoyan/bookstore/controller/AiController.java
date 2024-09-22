@@ -92,8 +92,7 @@ public class AiController {
 //            throw new AesException(AesException.ValidateSignatureError);
 //        }
 
-        String result = decrypt(echoStr);
-        return result;
+        return decrypt(echoStr);
     }
 
     public static String getSHA1(String token, String timestamp, String nonce, String encrypt) throws AesException
