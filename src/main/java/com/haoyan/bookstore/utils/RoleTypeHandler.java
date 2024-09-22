@@ -14,8 +14,6 @@ public class RoleTypeHandler implements TypeHandler<RoleEnum> {
 
     @Override
     public RoleEnum getResult(ResultSet rs, String columnName) throws SQLException {
-//        System.out.println(rs.getInt(columnName));
-//        System.out.println(RoleEnum.fromCode(rs.getInt(columnName)));
         return RoleEnum.fromCode(rs.getInt(columnName));
     }
 

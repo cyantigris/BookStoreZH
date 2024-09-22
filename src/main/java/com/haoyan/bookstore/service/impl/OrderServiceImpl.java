@@ -10,19 +10,23 @@ import com.haoyan.bookstore.pojo.entity.Order;
 import com.haoyan.bookstore.service.OrderService;
 import com.haoyan.bookstore.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     @Override
     public boolean create(OrderCreateRequest orderCreateRequest) {
         Date now = new Date();
         long timeStamp = now.getTime();
         Order order = new Order(
                 orderCreateRequest.getOrderId(),
-                orderCreateRequest.getItemList(),
+                orderCreateRequest.getItemList().toString(),
                 orderCreateRequest.getUserId(),
                 orderCreateRequest.getOrderStatus(),
                 orderCreateRequest.getAddress(),
@@ -37,6 +41,7 @@ public class OrderServiceImpl implements OrderService {
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -48,11 +53,12 @@ public class OrderServiceImpl implements OrderService {
         boolean res = false;
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         try{
-            UserDAO userDAO = sqlSession.getMapper(UserDAO.class);
-            int i = userDAO.removeUser(orderDeleteRequest.getOrderId());
+            OrderDAO orderDAO = sqlSession.getMapper(OrderDAO.class);
+            int i = orderDAO.delete(orderDeleteRequest.getOrderId());
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -71,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -89,6 +96,7 @@ public class OrderServiceImpl implements OrderService {
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -104,6 +112,7 @@ public class OrderServiceImpl implements OrderService {
             sqlSession.commit();
             return order;
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }

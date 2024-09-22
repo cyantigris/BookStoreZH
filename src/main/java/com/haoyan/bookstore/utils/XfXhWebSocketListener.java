@@ -1,4 +1,4 @@
-package com.haoyan.bookstore.pojo;
+package com.haoyan.bookstore.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.haoyan.bookstore.pojo.dto.MsgDTO;

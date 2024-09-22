@@ -4,27 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haoyan.bookstore.dao.OrderDAO">
     <insert id="create"  parameterType="com.haoyan.bookstore.pojo.entity.Order">
-        INSERT INTO order (order_id, item_list, userid, order_status, address, created_at, updated_at)
+        INSERT INTO orders(orderid, itemlist, userid, orderstatus, address, created_at, updated_at)
         VALUES(#{orderId},#{itemList}, #{userId}, #{orderStatus}, #{address}, #{createdAt}, #{updatedAt})
     </insert>
 
     <delete id="delete">
-        DELETE FROM order WHERE order_id = #{orderId}
+        DELETE FROM orders WHERE orderid = #{orderId}
     </delete>
 
     <update id="updateAddress">
-        Update order
+        Update orders
         SET
             address = #{address},
             updated_at = NOW()
-        WHERE order_id = #{orderId}
+        WHERE orderid = #{orderId}
     </update>
 
     <update id="updateOrderStatus">
-        Update order
+        Update orders
         SET
-            order_status = #{orderStatus},
+            orderstatus = #{orderStatus},
             updated_at = NOW()
-        WHERE order_id = #{orderId}
+        WHERE orderid = #{orderId}
     </update>
+    <select id="get">
+        SELECT orderid, itemlist, userid, orderstatus, address, created_at, updated_at
+        FROM orders
+        WHERE orderid = #{orderId}
+    </select>
 </mapper>

@@ -3,14 +3,14 @@ package com.haoyan.bookstore.pojo.dto;
 public class BookCreateRequest {
     private long bookId;
     private String name;
-    private String desc;
+    private String detail;
     private int stockNum;
     private String pic;
 
-    public BookCreateRequest(long bookId, String name, String desc, int stockNum, String pic) {
+    public BookCreateRequest(long bookId, String name, String detail, int stockNum, String pic) {
         this.bookId = bookId;
         this.name = name;
-        this.desc = desc;
+        this.detail = detail;
         this.stockNum = stockNum;
         this.pic = pic;
     }
@@ -31,12 +31,12 @@ public class BookCreateRequest {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public int getStockNum() {
@@ -60,7 +60,7 @@ public class BookCreateRequest {
         return "BookCreateRequest{" +
                 "bookId=" + bookId +
                 ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
+                ", detail='" + detail + '\'' +
                 ", stockNum=" + stockNum +
                 ", pic='" + pic + '\'' +
                 '}';

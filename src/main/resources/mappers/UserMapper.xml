@@ -9,7 +9,7 @@
     </insert>
 
     <delete id="removeUser">
-        DELETE FROM user WHERE book_id = #{userId}
+        DELETE FROM user WHERE userid = #{userId}
     </delete>
 
     <update id="updateUser">

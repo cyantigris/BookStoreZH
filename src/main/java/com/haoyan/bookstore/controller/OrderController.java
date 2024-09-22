@@ -2,70 +2,81 @@ package com.haoyan.bookstore.controller;
 
 import com.haoyan.bookstore.pojo.dto.*;
 import com.haoyan.bookstore.pojo.entity.Order;
-import com.haoyan.bookstore.pojo.enums.ApplicationStatusEnum;
 import com.haoyan.bookstore.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import static com.haoyan.bookstore.pojo.Constants.*;
+import static com.haoyan.bookstore.pojo.Constants.SUCCESS;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+    private final Logger logger = LoggerFactory.getLogger(OrderController.class);
     @Autowired
     OrderService orderService;
 
     @PostMapping("/create")
-    public Response<Order> create(OrderCreateRequest ocr){
-        Response<Order> res = new Response<>(
-                ApplicationStatusEnum.FAILURE.getState(),
-                ApplicationStatusEnum.FAILURE.getStateInfo(), null);
+    public Response<Order> create(@RequestBody OrderCreateRequest ocr){
+        Response<Order> response = new Response<>(
+                        FAILURE_CODE,
+                        FAILURE,null);
         if(orderService.create(ocr)){
-            res.setCode(ApplicationStatusEnum.SUCCESS.getState());
-            res.setMsg(ApplicationStatusEnum.SUCCESS.getStateInfo());
+            response.setCode(SUCCESS_CODE);
+            response.setMsg(SUCCESS);
+            logger.info("Order Create Success");
         }
-        return res;
+        return response;
     };
 
     @PostMapping("/updateAddress")
-    public Response<String> updateAddress(OrderAddressUpdateRequest orderAddressUpdateRequest){
-        Response<String> res = new Response<>(
-                ApplicationStatusEnum.FAILURE.getState(),
-                ApplicationStatusEnum.FAILURE.getStateInfo(), "");
+    public Response<String> updateAddress(@RequestBody OrderAddressUpdateRequest orderAddressUpdateRequest){
+        Response<String> response = new Response<>(
+                FAILURE_CODE,
+                FAILURE,"");
+
         if(orderService.updateAddress(orderAddressUpdateRequest)){
-            res.setCode(ApplicationStatusEnum.SUCCESS.getState());
-            res.setMsg(ApplicationStatusEnum.SUCCESS.getStateInfo());
+            response.setCode(SUCCESS_CODE);
+            response.setMsg(SUCCESS);
+            logger.info("Address Updated Success");
         }
 
-        return res;
+        return response;
     }
 
     @PostMapping("/updateStatus")
-    public Response<String> updateOrderStatus(OrderStatusUpdateRequest orderStatusUpdateRequest){
-        Response<String> res = new Response<>(
-                ApplicationStatusEnum.FAILURE.getState(),
-                ApplicationStatusEnum.FAILURE.getStateInfo(), "");
+    public Response<String> updateOrderStatus(@RequestBody OrderStatusUpdateRequest orderStatusUpdateRequest){
+        Response<String> response = new Response<>(
+                FAILURE_CODE,
+                FAILURE,"");
 
         if(orderService.updateOrderStatus(orderStatusUpdateRequest)){
-            res.setCode(ApplicationStatusEnum.SUCCESS.getState());
-            res.setMsg(ApplicationStatusEnum.SUCCESS.getStateInfo());
+            response.setCode(SUCCESS_CODE);
+            response.setMsg(SUCCESS);
+            logger.info("Order Status Updated Success");
         }
 
-        return res;
+        return response;
     }
 
     @PostMapping("/delete")
-    public Response<String> delete(OrderDeleteRequest odr){
-        Response<String> res = new Response<>(
-                ApplicationStatusEnum.FAILURE.getState(),
-                ApplicationStatusEnum.FAILURE.getStateInfo(), "");
+    public Response<String> delete(@RequestBody OrderDeleteRequest orderDeleteRequest){
+        Response<String> response = new Response<>(
+                FAILURE_CODE,
+                FAILURE,"");
 
-        if(orderService.delete(odr)){
-            res.setCode(ApplicationStatusEnum.SUCCESS.getState());
-            res.setMsg(ApplicationStatusEnum.SUCCESS.getStateInfo());
+        if(orderService.delete(orderDeleteRequest)){
+            response.setCode(SUCCESS_CODE);
+            response.setMsg(SUCCESS);
+            logger.info("Order delete Success");
         }
 
-        return res;
+        return response;
     }
 
 }

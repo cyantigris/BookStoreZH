@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haoyan.bookstore.dao.BookDAO">
     <insert id="addBook"  parameterType="com.haoyan.bookstore.pojo.entity.Book">
-        INSERT INTO book (book_id, name, detail, stock_num, pic, created_at, updated_at)
-        VALUES(#{bookId},#{name}, #{desc}, #{stockNum}, #{pic}, #{createdAt}, #{updatedAt})
+        INSERT INTO book (bookid, name, detail, stocknum, pic, created_at, updated_at)
+        VALUES(#{bookId},#{name}, #{detail}, #{stockNum}, #{pic}, #{createdAt}, #{updatedAt})
     </insert>
 
     <delete id="removeBook">
-        DELETE FROM book WHERE book_id = #{bookId}
+        DELETE FROM book WHERE bookid = #{bookId}
     </delete>
 
     <update id="updateBook">
         Update book
         SET name = #{name},
-            detail = #{desc},
-            stock_num = #{stockNum},
+            detail = #{detail},
+            stocknum = #{stockNum},
             pic = #{pic},
             updated_at = NOW()
-        WHERE book_id = #{bookId}
+        WHERE bookid = #{bookId}
     </update>
     <resultMap id="bookMap" type="com.haoyan.bookstore.pojo.entity.Book">
         <result column="bookid" property="bookId"/>

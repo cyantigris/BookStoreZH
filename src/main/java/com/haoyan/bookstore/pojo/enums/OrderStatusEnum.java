@@ -8,8 +8,8 @@ public enum OrderStatusEnum {
     SHIPPING(4,"Order Shipping"),
     SUCCESS(5,"Order Success"),
     FAILURE(6,"Order Failure");
-    private int state;
-    private String stateInfo;
+    private final int state;
+    private final String stateInfo;
     OrderStatusEnum(int state, String stateInfo) {
         this.state = state;
         this.stateInfo = stateInfo;

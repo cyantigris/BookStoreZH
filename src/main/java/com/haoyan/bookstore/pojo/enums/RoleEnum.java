@@ -4,7 +4,7 @@ public enum RoleEnum {
     ADMIN(0 ),
     USER(1),
     BLOCKED(2);
-    private int code;
+    private final int code;
     RoleEnum(int code){
         this.code = code;
     }

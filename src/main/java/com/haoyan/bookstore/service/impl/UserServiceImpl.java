@@ -9,11 +9,14 @@ import com.haoyan.bookstore.pojo.entity.User;
 import com.haoyan.bookstore.service.UserService;
 import com.haoyan.bookstore.utils.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 @Service
 public class UserServiceImpl implements UserService {
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     @Override
     public boolean create(UserCreateRequest ucr) {
         Date now = new Date();
@@ -34,6 +37,7 @@ public class UserServiceImpl implements UserService {
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -52,6 +56,7 @@ public class UserServiceImpl implements UserService {
             }
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -68,6 +73,7 @@ public class UserServiceImpl implements UserService {
             res = i > 0;
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -79,22 +85,30 @@ public class UserServiceImpl implements UserService {
     public boolean modification(UserModifyRequest umr) {
         Date now = new Date();
         long timeStamp = now.getTime();
-        User usr = new User(
-                umr.getUserId(),
-                umr.getUserName(),
-                umr.getRole(),
-                umr.getPassword(),
-                timeStamp,
-                timeStamp
-        );
+
         boolean res = false;
         SqlSession sqlSession = MyBatisUtil.getSqlSession();
         try{
             UserDAO usrDao = sqlSession.getMapper(UserDAO.class);
-            int i = usrDao.updateUser(usr);
+            User user = usrDao.queryById(umr.getUserId());
+
+            if(!umr.getUserName().isEmpty() && !umr.getUserName().equals(user.getUserName())){
+                user.setUserName(umr.getUserName());
+            }
+
+            if(!umr.getPassword().isEmpty() && !umr.getPassword().equals(user.getPassword())){
+                user.setPassword(umr.getPassword());
+            }
+
+            user.setUpdatedAt(timeStamp);
+            int i = usrDao.updateUser(user);
+
             res = i > 0;
+
             sqlSession.commit();
+
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }
@@ -112,6 +126,7 @@ public class UserServiceImpl implements UserService {
             }
             sqlSession.commit();
         } catch (Exception e){
+            logger.error(e.toString());
             e.printStackTrace();
             sqlSession.rollback();
         }

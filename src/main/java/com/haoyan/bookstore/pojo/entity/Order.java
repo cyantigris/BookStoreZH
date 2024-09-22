@@ -1,19 +1,21 @@
 package com.haoyan.bookstore.pojo.entity;
 
+import com.haoyan.bookstore.pojo.dto.OrderItem;
 import com.haoyan.bookstore.pojo.enums.OrderStatusEnum;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Order {
     private long orderId;
-    private HashMap<Long, Integer> itemList;
+    private String itemList;
     private int userId;
     private OrderStatusEnum orderStatus;
     private String address;
     private long createdAt;
     private long updatedAt;
 
-    public Order(long orderId, HashMap<Long, Integer> itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
+    public Order(long orderId, String itemList, int userId, OrderStatusEnum orderStatus, String address, long createdAt, long updatedAt) {
         this.orderId = orderId;
         this.itemList = itemList;
         this.userId = userId;
@@ -31,11 +33,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public HashMap<Long, Integer> getItemList() {
+
+    public String getItemList() {
         return itemList;
     }
 
-    public void setItemList(HashMap<Long, Integer> itemList) {
+    public void setItemList(String itemList) {
         this.itemList = itemList;
     }
 
@@ -67,7 +70,7 @@ public class Order {
         return createdAt;
     }
 
-    public void setCreatedAt(int createdAt) {
+    public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -75,7 +78,7 @@ public class Order {
         return updatedAt;
     }
 
-    public void setUpdatedAt(int updatedAt) {
+    public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
     }
 

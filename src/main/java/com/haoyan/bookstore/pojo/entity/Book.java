@@ -80,7 +80,7 @@ public class Book {
         return "Book{" +
                 "bookId=" + bookId +
                 ", name='" + name + '\'' +
-                ", desc='" + detail + '\'' +
+                ", detail='" + detail + '\'' +
                 ", stockNum=" + stockNum +
                 ", pic='" + pic + '\'' +
                 ", createdAt=" + createdAt +

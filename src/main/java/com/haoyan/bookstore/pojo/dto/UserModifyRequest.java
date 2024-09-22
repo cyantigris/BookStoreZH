@@ -5,13 +5,11 @@ import com.haoyan.bookstore.pojo.enums.RoleEnum;
 public class UserModifyRequest {
     private int userId;
     private String userName;
-    private RoleEnum role;
     private String password;
 
-    public UserModifyRequest(int userId, String userName, RoleEnum role, String password) {
+    public UserModifyRequest(int userId, String userName, String password) {
         this.userId = userId;
         this.userName = userName;
-        this.role = role;
         this.password = password;
     }
 
@@ -29,14 +27,6 @@ public class UserModifyRequest {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public RoleEnum getRole() {
-        return role;
-    }
-
-    public void setRole(RoleEnum role) {
-        this.role = role;
     }
 
     public String getPassword() {
